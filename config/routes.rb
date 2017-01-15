@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
   get 'session/new'
 
-  resources :risk_mitigations
   resources :categories
   resources :projects do
     resources :risk_registers
+  end
+  resources :risk_registers, only: [] do
+    resources :risk_mitigations    
   end
   resources :users
   resources :designations

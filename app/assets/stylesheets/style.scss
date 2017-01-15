@@ -1,0 +1,26 @@
+.container {
+    margin-top: 60px;
+}
+
+#flash-msg {
+    margin-bottom: 7px;
+}
+
+#header-breadcrumb {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    
+    .page-header {
+        margin-top: 5px;
+        padding-top: 0px;
+        font-size: 25px;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+    .breadcrumb {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}

@@ -1,15 +1,16 @@
-<h1>Listing Risk Registers, <%= @project.name %></h1>
+<%= render 'layouts/header', title: "Risk Register" %>
+
+<p><%= link_to 'New Risk', new_project_risk_register_path(@project), class: "btn btn-primary" %></p>
 
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Risk no</th>
+      <th>Risk No</th>
       <th>Project</th>
       <th>Description</th>
       <th>Probability</th>
       <th>Impact</th>
-      <th>Target date</th>
-      <th>Status</th>
+      <th>Target Date</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -19,21 +20,17 @@
       <tr>
         <td><%= risk_register.risk_no %></td>
         <td><%= risk_register.project.name %></td>
-        <td><%= truncate(risk_register.description, length: 200) %></td>
+        <td><%= truncate(risk_register.description, length: 180) %></td>
         <td><%= risk_register.probability %></td>
         <td><%= risk_register.impact %></td>
         <td><%= format_target_date(risk_register.target_date) %></td>
-        <td><%= risk_register.status %></td>
         <td>
           <%= link_to 'Show', project_risk_register_path(@project, risk_register) %>&nbsp;
           <%= link_to 'Edit', edit_project_risk_register_path(@project, risk_register) %>&nbsp;
-          <%= link_to 'Destroy', project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Delete', project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Risk register', new_project_risk_register_path(@project) %>

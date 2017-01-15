@@ -1,13 +1,24 @@
-<h3>Risk No <%= @risk_register.risk_no %></h3>
+<%= render 'layouts/header', title: "Risk Mitigation Steps" %>
+
+<p><strong>Risk No:</strong> <%= @risk_register.risk_no %></p>
 <p><strong>Category:</strong> <%= append_category_names(@risk_register.categories) %></p>
 <p><strong>Impact:</strong> <%= @risk_register.impact %></p>
 <p><strong>Probability:</strong> <%= @risk_register.probability %></p>
 <p><strong>Target Date:</strong> <%= format_target_date(@risk_register.target_date) %></p>
 <p><strong>Description:</strong> <%= @risk_register.description %></p>
 <h3>Mitigation Steps</h3>
-<p><strong>Mitigators:</strong> <%= append_mitigator_names(@risk_register.users) %></p>
+<p><strong>Mitigators:</strong> <%= append_mitigator_emails(@risk_register.users) %></p>
+<p><%= link_to "Add Mitigations", new_risk_register_risk_mitigation_path, class: "btn btn-primary" %></p>
 <ol>
   <% @risk_mitigations.each do |risk_mitigation| %>
-  <li><%= risk_mitigation.mitigation_step %></li>
+  <div class="row">
+    <li>
+      <div class="col-sm-10"><%= risk_mitigation.mitigation_step %></div>
+      <div class="col-sm-2">
+        <%= link_to "Edit", edit_risk_register_risk_mitigation_path(@risk_register, risk_mitigation) %>&nbsp;
+        <%= link_to "Delete", risk_register_risk_mitigation_path(@risk_register, risk_mitigation), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </li>
+  </div>  
   <% end %>
 </ol>

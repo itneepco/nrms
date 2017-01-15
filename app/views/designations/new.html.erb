@@ -1,5 +1,7 @@
-<h1>New Designation</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', designations_path %>
+<div class="row">
+    <div class="col-md-6">
+        <%= render 'layouts/header', title: "New Designation" %>
+        <%= render 'form' %>
+        <%= link_to 'Back', designations_path %>
+    </div>
+</div>

@@ -22,9 +22,19 @@ module SessionHelper
   def risk_viewer?
     return current_user.role == 5
   end
+  
+  def admin_or_corporate_admin?
+    sysadmin? || corporate_rm?
+  end
+  
+  def admin_or_risk_manager?
+    sysadmin? || corporate_rm? || project_rm?
+  end  
     
   def user_name
-    current_user.email if current_user
+    if current_user
+      current_user.first_name + " " + current_user.last_name 
+    end
   end
   
   def check_sysadmin_corporate_rm?(user)

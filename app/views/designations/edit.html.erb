@@ -1,6 +1,7 @@
-<h1>Editing Designation</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @designation %> |
-<%= link_to 'Back', designations_path %>
+<div class="row">
+    <div class="col-md-6">
+        <%= render 'layouts/header', title: "Edit Designation" %>
+        <%= render 'form' %>
+        <%= link_to 'Back', designations_path %>
+    </div>
+</div>

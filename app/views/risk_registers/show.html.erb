@@ -1,3 +1,5 @@
+<%= render 'layouts/header', title: "Show Risk" %>
+
 <p>
   <strong>Risk no:</strong>
   <%= @risk_register.risk_no %>
@@ -50,7 +52,12 @@
 
 <p>
   <strong>Risk Mitigators:</strong>
-  <%= append_mitigator_names(@risk_register.users) %>
+  <%= append_mitigator_emails(@risk_register.users) %>
+</p>
+
+<p>
+  <strong>Mitigation Plan:</strong>
+  <%= @risk_register.mitigation_plan %>
 </p>
 
 <%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |

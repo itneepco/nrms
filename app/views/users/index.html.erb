@@ -1,7 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Users</h1>
-
+<%= render 'layouts/header', title: "Users" %>
+<p><%= link_to 'New User', new_user_path, class: "btn btn-primary" %></p>
 <table class="table table-bordered table-condensed table-hover">
   <thead>
     <tr>
@@ -28,13 +26,9 @@
         <td><%= check_user_role(user.role) %></td>
         <td>
           <%= link_to 'Edit', edit_user_path(user) %>&nbsp;
-          <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } unless check_sysadmin_corporate_rm?(user) %>
+          <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } unless check_sysadmin_corporate_rm?(user) %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>

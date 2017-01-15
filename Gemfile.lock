@@ -43,6 +43,8 @@ GEM
     bcrypt (3.1.11-x86-mingw32)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.6.4.1)
+      railties (>= 3.0)
     bootstrap-multiselect-rails (0.9.9)
       rails (>= 4.0.0)
     bootstrap-sass (3.3.7)
@@ -58,7 +60,13 @@ GEM
       execjs
     coffee-script-source (1.11.1)
     concurrent-ruby (1.0.2)
+    daemons (1.2.4)
     debug_inspector (0.0.2)
+    delayed_job (4.1.2)
+      activesupport (>= 3.0, < 5.1)
+    delayed_job_active_record (4.1.1)
+      activerecord (>= 3.0, < 5.1)
+      delayed_job (>= 3.0, < 5)
     erubis (2.7.0)
     execjs (2.7.0)
     font-awesome-rails (4.7.0.1)
@@ -163,10 +171,13 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  bootstrap-datepicker-rails
   bootstrap-multiselect-rails
   bootstrap-sass (~> 3.3.6)
   byebug
   coffee-rails (~> 4.1.0)
+  daemons
+  delayed_job_active_record
   font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails

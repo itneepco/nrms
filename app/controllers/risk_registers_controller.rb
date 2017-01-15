@@ -1,6 +1,7 @@
 class RiskRegistersController < ApplicationController
   before_action :authorize
   before_action :set_project
+  before_action :all_except_risk_viewer
   before_action :check_current_user_project
   before_action :set_risk_register, only: [:show, :edit, :update, :destroy]
 
@@ -32,6 +33,9 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.save
+        RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
+        RiskMailer.delay.send_notification_to_rm(@risk_register) if User.risk_manager_exist?(@project) #send email notification to project & corporate risk manager 
+        
         format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully created.' }
         format.json { render :show, status: :created, location: @risk_register }
       else
@@ -48,6 +52,8 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.update(risk_register_params)
+        RiskMailer.delay.send_risk_reminder(@risk_register) #send email notification to mitigators
+        
         format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully updated.' }
         format.json { render :show, status: :ok, location: @risk_register }
       else
@@ -62,7 +68,7 @@ class RiskRegistersController < ApplicationController
   def destroy
     @risk_register.destroy
     respond_to do |format|
-      format.html { redirect_to risk_registers_url, notice: 'Risk register was successfully destroyed.' }
+      format.html { redirect_to project_risk_registers_url, notice: 'Risk register was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -79,7 +85,7 @@ class RiskRegistersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_register_params
-      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :category_ids => [], :user_ids => [])
+      params.require(:risk_register).permit(:description, :probability, :impact, :target_date, :status, :mitigation_plan, :category_ids => [], :user_ids => [])
     end
     
     #verify the project to which the current user belongs to

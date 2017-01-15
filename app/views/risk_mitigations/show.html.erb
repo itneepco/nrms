@@ -1,6 +1,6 @@
 <p>
   <strong>Risk register:</strong>
-  <%= @risk_mitigation.risk_register %>
+  <%= @risk_mitigation.risk_register.risk_no %>
 </p>
 
 <p>
@@ -8,5 +8,5 @@
   <%= @risk_mitigation.mitigation_step %>
 </p>
 
-<%= link_to 'Edit', edit_risk_mitigation_path(@risk_mitigation) %> |
-<%= link_to 'Back', risk_mitigations_path %>
+<%= link_to 'Edit', edit_risk_register_risk_mitigation_path(@risk_register, @risk_mitigation) %> |
+<%= link_to 'Back', risk_register_risk_mitigations_path(@risk_register) %>

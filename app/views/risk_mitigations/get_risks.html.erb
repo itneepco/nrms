@@ -1,4 +1,4 @@
-<h1>Listing Risks</h1>
+<%= render 'layouts/header', title: "Risk Assignments" %>
 
 <table class="table table-condensed table-hover">
   <thead>
@@ -15,10 +15,9 @@
     <% @risk_registers.each do |risk_register| %>
       <tr>
         <td><%= risk_register.risk_no %></td>
-        <td><%= truncate(risk_register.description, length: 200) %></td>
+        <td><%= truncate(risk_register.description, length: 180) %></td>
         <td><%= format_target_date(risk_register.target_date) %></td>
-        <td><%= link_to "Show Mitigation Steps", risk_mitigations_path(risk_id: risk_register.id) %></td>
-        <td><%= link_to 'Add Risk mitigation', new_risk_mitigation_path(risk_id: risk_register.id) %></td>
+        <td><%= link_to "Mitigation Steps", risk_register_risk_mitigations_path(risk_register) %></td>
       </tr>
     <% end %>
   </tbody>

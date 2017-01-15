@@ -1,28 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8">
+    <%= render 'layouts/header', title: "Designations" %>
+    
+    <p><%= link_to 'New Designation', new_designation_path, class: "btn btn-primary" %></p>
+    
+    <table class="table table-bordered table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @designations.each do |designation| %>
+          <tr>
+            <td><%= designation.name %></td>
+            <td>
+              <%= link_to 'Edit', edit_designation_path(designation) %>&nbsp;
+              <%= link_to 'Delete', designation, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+    
 
-<h1>Listing Designations</h1>
 
-<table class="table table-bordered table-condensed table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @designations.each do |designation| %>
-      <tr>
-        <td><%= designation.name %></td>
-        <td>
-          <%= link_to 'Edit', edit_designation_path(designation) %>&nbsp;
-          <%= link_to 'Delete', designation, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Designation', new_designation_path %>

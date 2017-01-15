@@ -1,17 +1,29 @@
 <%= simple_form_for(@user) do |f| %>
-  <%= f.error_notification %>
+  <div class="row">
+    <div class="col-sm-10"><%= f.error_notification %></div>
+  </div>
 
   <div class="form-inputs">
-    <%= f.input :email %>
-    <%= f.input :first_name %>
-    <%= f.input :mid_name, label: "Middle Name" %>
-    <%= f.input :last_name %>
-    <%= f.association :designation, collection: Designation.order(:name) %><br>
-    <%= f.input :department %>
-    <%= f.association :project, collection: Project.order(:name) %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
-    <%= f.input :role, collection: User::USER_ROLES %>
+    <div class="row">
+      <div class="col-sm-5"><%= f.input :first_name %></div>
+      <div class="col-sm-5"><%= f.input :mid_name, label: "Middle name" %></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5"><%= f.input :last_name %></div>
+      <div class="col-sm-5"><%= f.input :email %></div>
+    </div>
+    <div class="row">  
+      <div class="col-sm-5"><%= f.input :department %></div>
+      <div class="col-sm-5"><%= f.association :designation, collection: Designation.order(:name) %></div>
+    </div>
+    <div class="row">  
+      <div class="col-sm-5"><%= f.association :project, collection: Project.order(:name) %></div>
+      <div class="col-sm-5"><%= f.input :role, collection: User::USER_ROLES %></div>
+    </div>
+    <div class="row">  
+      <div class="col-sm-5"><%= f.input :password %></div>
+      <div class="col-sm-5"><%= f.input :password_confirmation %></div>
+    </div>
   </div>
   
   <div class="form-actions">

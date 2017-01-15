@@ -2,13 +2,29 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :risk_no %>
-    <%= f.association :categories, input_html: { class: "category" }, label_html: { class: "block_label" } %>
-    <%= f.input :description %>
-    <%= f.input :probability, collection: RiskRegister::RISK_PROBABILITY, prompt: "Select Probability" %>
-    <%= f.input :impact, collection: RiskRegister::RISK_IMPACT, prompt: "Select Impact" %>
-    <%= f.association :users, collection: @project.users.order(:email).map {|s| [s.email, s.id]}, input_html: { class: "risk_mitigator" }, label_html: { class: "block_label" }, label: "Risk Mitigators" %>
-    <%= f.input :target_date %>
+    <div class="row">
+      <div class="col-sm-8"><%= f.association :categories, input_html: { class: "category" }, label_html: { class: "block_label" } %></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-4"><%= f.input :probability, collection: RiskRegister::RISK_PROBABILITY, prompt: "Select Probability" %></div>
+      <div class="col-sm-4"><%= f.input :impact, collection: RiskRegister::RISK_IMPACT, prompt: "Select Impact" %></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-10"><%= f.input :description %></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-4"><%= f.input :target_date, as: :string, placeholder: "yyyy-mm-dd", input_html: {class: "datepicker"} %></div>
+      <div class="col-sm-8"><%= f.association :users, collection: @project.get_mitigator_list, input_html: { class: "risk_mitigator" },
+                              label_html: { class: "block_label" }, label: "Risk Mitigators" %></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-10"><%= f.input :mitigation_plan %></div>
+    </div>
+    
   </div>
   <div class="form-actions">
     <%= f.button :submit %>
@@ -19,6 +35,11 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('.category').multiselect();  
-    $('.risk_mitigator').multiselect();  
+    $('.risk_mitigator').multiselect(); 
+    $('input.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+			  todayHighlight: true,
+			  autoclose: true,
+    });
   });
 </script>

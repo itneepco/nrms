@@ -1,6 +1,5 @@
-<h1>Editing Risk Mitigation</h1>
+<%= render 'layouts/header', title: "Edit Mitigation" %>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @risk_mitigation %> |
-<%= link_to 'Back', risk_mitigations_path %>
+<%= link_to 'Back', risk_register_risk_mitigations_path(@risk_register) %>
